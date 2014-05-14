@@ -1,0 +1,118 @@
+{
+	"input": {
+		"buttons": {
+			"p1": { "addr": 1, "bitmask": "0x80" },
+			"p2": { "addr": 1, "bitmask": "0x40" },
+			"p3": { "addr": 1, "bitmask": "0x20" },
+			"p4": { "addr": 1, "bitmask": "0x10" },
+			"p5": { "addr": 1, "bitmask": "0x08" },
+			"p6": { "addr": 1, "bitmask": "0x04" },
+			"p7": { "addr": 1, "bitmask": "0x02" },
+			"p8": { "addr": 1, "bitmask": "0x01" },
+			"p9": { "addr": 2, "bitmask": "0x80" },
+			"p10": { "addr": 2, "bitmask": "0x40" },
+			"p11": { "addr": 2, "bitmask": "0x20" },
+			"p12": { "addr": 2, "bitmask": "0x10" },
+			"p13": { "addr": 2, "bitmask": "0x08" },
+			"p14": { "addr": 2, "bitmask": "0x04" },
+			"p15": { "addr": 2, "bitmask": "0x02" },
+			"p16": { "addr": 2, "bitmask": "0x01" },
+
+			"l1": { "addr": 4, "bitmask": "0x80" },
+			"l2": { "addr": 4, "bitmask": "0x40" },
+			"l3": { "addr": 4, "bitmask": "0x20" },
+			"l4": { "addr": 4, "bitmask": "0x10" },
+
+			"sync": { "addr":4, "bitmask": "0x08" },
+			"quant": { "addr":4, "bitmask": "0x04" },
+			"capture": { "addr":4, "bitmask": "0x02" },
+			"shift": { "addr":3, "bitmask": "0x80" },
+			"reverse": { "addr":3, "bitmask": "0x40" },
+			"type": { "addr":3, "bitmask": "0x20" },
+			"size": { "addr":3, "bitmask": "0x10" },
+			"browse": { "addr":3, "bitmask": "0x08" },
+			"stepper": { "addr":3, "bitmask": "0x04" }
+		},
+
+		"steppers": {
+			"stepper": { "addr":5 }
+		},
+
+		"knobs": {
+			"k1": { "msb":7, "lsb":6 },
+			"k2": { "msb":9, "lsb":8 },
+			"k3": { "msb":11, "lsb":10 },
+			"k4": { "msb":13, "lsb":12 }
+		},
+
+		"sliders": {
+			"s1": { "msb":15, "lsb":14 },
+			"s2": { "msb":17, "lsb":16 },
+			"s3": { "msb":19, "lsb":18 },
+			"s4": { "msb":21, "lsb":20 }
+		}
+	},
+	"output": {
+		"leds": {
+			"sync": { "addr":24 },
+			"quant": { "addr":23 },
+			"capture": { "addr":22 },
+			"shift": { "addr":21 },
+			"reverse": { "addr":20 },
+			"type": { "addr":19 },
+			"size": { "addr":18 },
+			"browse": { "addr":17 },
+
+			"l1_l": { "addr": 80},
+			"l1_r": { "addr": 79},
+			"l2_l": { "addr": 78},
+			"l2_r": { "addr": 77},
+			"l3_l": { "addr": 76},
+			"l3_r": { "addr": 75},
+			"l4_l": { "addr": 74},
+			"l4_r": { "addr": 73}
+		},
+
+		"rgb_leds": {
+			"p1": { "rAddr":26, "gAddr":27, "bAddr":25},
+			"p2": { "rAddr":29, "gAddr":30, "bAddr":28},
+			"p3": { "rAddr":32, "gAddr":33, "bAddr":31},
+			"p4": { "rAddr":35, "gAddr":36, "bAddr":34},
+			"p5": { "rAddr":38, "gAddr":39, "bAddr":37},
+			"p6": { "rAddr":41, "gAddr":42, "bAddr":40},
+			"p7": { "rAddr":44, "gAddr":45, "bAddr":43},
+			"p8": { "rAddr":47, "gAddr":48, "bAddr":46},
+			"p9": { "rAddr":50, "gAddr":51, "bAddr":49},
+			"p10": { "rAddr":53, "gAddr":54, "bAddr":52},
+			"p11": { "rAddr":56, "gAddr":57, "bAddr":55},
+			"p12": { "rAddr":59, "gAddr":60, "bAddr":58},
+			"p13": { "rAddr":62, "gAddr":63, "bAddr":61},
+			"p14": { "rAddr":65, "gAddr":66, "bAddr":64},
+			"p15": { "rAddr":68, "gAddr":69, "bAddr":67},
+			"p16": { "rAddr":71, "gAddr":72, "bAddr":70}
+		},
+
+		"lcd": {
+			"r": {
+				"a":5,
+				"b":4,
+				"c":3,
+				"d":8,
+				"e":7,
+				"f":6,
+				"g":2,
+				"dp":1
+			},
+			"l": {
+				"a":13,
+				"b":12,
+				"c":11,
+				"d":16,
+				"e":15,
+				"f":14,
+				"g":10,
+				"dp":9
+			}
+		}
+	}
+}

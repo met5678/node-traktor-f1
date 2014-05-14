@@ -1,0 +1,169 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install', 'node-hid' ]
+2 info using npm@1.4.9
+3 info using node@v0.10.28
+4 verbose node symlink /usr/bin/node
+5 verbose cache add [ 'node-hid', null ]
+6 verbose cache add name=undefined spec="node-hid" args=["node-hid",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'node-hid',
+7 verbose parsed url   path: 'node-hid',
+7 verbose parsed url   href: 'node-hid' }
+8 silly lockFile dc1f08e9-node-hid node-hid
+9 verbose lock node-hid /home/andrew/.npm/dc1f08e9-node-hid.lock
+10 silly lockFile dc1f08e9-node-hid node-hid
+11 silly lockFile dc1f08e9-node-hid node-hid
+12 verbose addNamed [ 'node-hid', '' ]
+13 verbose addNamed [ null, '*' ]
+14 silly lockFile 4d68aba3-node-hid node-hid@
+15 verbose lock node-hid@ /home/andrew/.npm/4d68aba3-node-hid.lock
+16 silly addNameRange { name: 'node-hid', range: '*', hasData: false }
+17 verbose url raw node-hid
+18 verbose url resolving [ 'https://registry.npmjs.org/', './node-hid' ]
+19 verbose url resolved https://registry.npmjs.org/node-hid
+20 info trying registry request attempt 1 at 00:35:49
+21 verbose etag "68FG1A3J1JVH3VOHWQH6ONOHX"
+22 http GET https://registry.npmjs.org/node-hid
+23 http 304 https://registry.npmjs.org/node-hid
+24 silly registry.get cb [ 304,
+24 silly registry.get   { date: 'Wed, 14 May 2014 06:35:51 GMT',
+24 silly registry.get     server: 'Apache',
+24 silly registry.get     via: '1.1 varnish',
+24 silly registry.get     'last-modified': 'Wed, 14 May 2014 06:35:51 GMT',
+24 silly registry.get     'cache-control': 'max-age=1',
+24 silly registry.get     etag: '"68FG1A3J1JVH3VOHWQH6ONOHX"',
+24 silly registry.get     'x-served-by': 'cache-c31-CHI',
+24 silly registry.get     'x-cache': 'MISS',
+24 silly registry.get     'x-cache-hits': '0',
+24 silly registry.get     'x-timer': 'S1400049351.291031122,VS0,VE28',
+24 silly registry.get     vary: 'Accept',
+24 silly registry.get     'content-length': '0',
+24 silly registry.get     'keep-alive': 'timeout=10, max=50',
+24 silly registry.get     connection: 'Keep-Alive' } ]
+25 verbose etag node-hid from cache
+26 silly addNameRange number 2 { name: 'node-hid', range: '*', hasData: true }
+27 silly addNameRange versions [ 'node-hid',
+27 silly addNameRange   [ '0.0.13',
+27 silly addNameRange     '0.0.14',
+27 silly addNameRange     '0.0.15',
+27 silly addNameRange     '0.1.0',
+27 silly addNameRange     '0.1.1',
+27 silly addNameRange     '0.2.0',
+27 silly addNameRange     '0.2.1',
+27 silly addNameRange     '0.2.2',
+27 silly addNameRange     '0.2.3',
+27 silly addNameRange     '0.3.1' ] ]
+28 verbose addNamed [ 'node-hid', '0.3.1' ]
+29 verbose addNamed [ '0.3.1', '0.3.1' ]
+30 silly lockFile 366b836a-node-hid-0-3-1 node-hid@0.3.1
+31 verbose lock node-hid@0.3.1 /home/andrew/.npm/366b836a-node-hid-0-3-1.lock
+32 silly lockFile 366b836a-node-hid-0-3-1 node-hid@0.3.1
+33 silly lockFile 366b836a-node-hid-0-3-1 node-hid@0.3.1
+34 silly lockFile 4d68aba3-node-hid node-hid@
+35 silly lockFile 4d68aba3-node-hid node-hid@
+36 silly resolved [ { name: 'node-hid',
+36 silly resolved     description: 'USB HID device access library',
+36 silly resolved     version: '0.3.1',
+36 silly resolved     author:
+36 silly resolved      { name: 'Hans Hübner',
+36 silly resolved        email: 'hans.huebner@gmail.com',
+36 silly resolved        url: 'https://github.com/hanshuebner' },
+36 silly resolved     contributors: [ [Object] ],
+36 silly resolved     repository:
+36 silly resolved      { type: 'git',
+36 silly resolved        url: 'git://github.com/hanshuebner/node-hid.git' },
+36 silly resolved     bundleDependencies: [ 'hidapi' ],
+36 silly resolved     scripts:
+36 silly resolved      { preupdate: 'sh get-hidapi.sh',
+36 silly resolved        preinstall: 'sh get-hidapi.sh',
+36 silly resolved        install: 'sh install.sh' },
+36 silly resolved     main: './index.js',
+36 silly resolved     engines: { node: '>=0.8.0' },
+36 silly resolved     license: 'MIT/X11',
+36 silly resolved     dependencies: {},
+36 silly resolved     devDependencies: {},
+36 silly resolved     readme: '# node-hid - Access USB HID devices from node.js #\n\n## Installation\n\n### Prerequisites:\n\n* Mac OS (I use 10.6.8) or Linux (kernel 2.6+) or Windows XP+\n* node.js v0.8\n* libudev-dev (Linux only)\n* libusb-1.0-0-dev (Ubuntu versions missing `libusb.h` only)\n* git\n\n### Compile from source on Linux or OSX\n\nUse npm to execute all installation steps:\n\n```\nnpm install\n```\n\n### Compile from source on Windows\n\nUse node-gyp to compile the extension.\n\nPlease note that Windows support is incomplete and needs some work\nto pull it to the same level as on Linux and OSX.  See issues #10\nand #15 in github for discussion.  Pull requests to improve Windows\nsupport would be welcome.\n\n## Test it\n\nIn the ```src/``` directory, various JavaScript programs can be found\nthat talk to specific devices in some way.  The ```show-devices.js```\nprogram can be used to display all HID devices in the system.\n\n## How to Use\n\n### Load the extension\n\n```\nvar HID = require(\'node-hid\');\n```\n\n### Get a list of all HID devices in the system:\n\n```\nvar devices = HID.devices()\n```\n\ndevices will contain an array of objects, one for each HID device\navailable.  Of particular interest are the ```vendorId``` and\n```productId```, as they uniquely identify a device, and the\n```path```, which is needed to open a particular device.\n\nHere is some sample output:\n```\nHID.devices();\n[ { vendorId: 1452,\n    productId: 595,\n    path: \'USB_05ac_0253_0x100a148e0\',\n    serialNumber: \'\',\n    manufacturer: \'Apple Inc.\',\n    product: \'Apple Internal Keyboard / Trackpad\',\n    release: 280,\n    interface: -1 },\n  { vendorId: 1452,\n    productId: 595,\n    path: \'USB_05ac_0253_0x100a14e20\',\n    serialNumber: \'\',\n    manufacturer: \'Apple Inc.\',\n    product: \'Apple Internal Keyboard / Trackpad\',\n    release: 280,\n    interface: -1 },\n<and more>\n```\n\n### Opening a device\n\nBefore a device can be read from or written to, it must be opened:\n\n```\nvar device = new HID.HID(path);\n```\n\n```device``` will contain a handle to the device.  The ```path``` can\nbe determined by a prior HID.devices() call.  If an error occurs\nopening the device, an exception will be thrown.\n\n### Reading from a device\n\nReading from a device is performed by registering a "data" event\nhandler:\n\n```\ndevice.on("data", function(data) {});\n```\n\nYou can also listen for errors like this:\n\n```\ndevice.on("error", function(err) {});\n```\n\nAll reading is asynchronous.\n\n### Writing to a device\n\nWriting to a device is performed using the write call in a device\nhandle.  All writing is synchronous.\n\n```\ndevice.write([0x00, 0x01, 0x01, 0x05, 0xff, 0xff]);\n```\n\n### Support\n\nI can only provide limited support, in particular for operating\nsystems and devices that I don\'t know.  Please use the\n[node-hid Google Group](https://groups.google.com/d/forum/node-hid) \nfor general support inquiries (node-hid@googlegroups.com).\n\n## Complete API\n\n```\nvar device = new HID.HID(path);\n```\n\n### Event: "data"\n\n- `chunk` - Buffer - the data read from the device\n\n### Event: "error"\n\n- `error` - The error Object emitted\n\n### device.write(data)\n\n- `data` - the data to be synchronously written to the device\n\n### device.close()\n\nCloses the device. Subsequent reads will raise an error.\n\n### device.pause()\n\nPauses reading and the emission of `data` events.\n\n### device.resume()\n\nThis method will cause the HID device to resume emmitting `data` events.\nIf no listeners are registered for the `data` event, data will be lost.\n\nWhen a `data` event is registered for this HID device, this method will\nbe automatically called.\n\n### device.read(callback)\n\nLow-level function call to initiate an asynchronous read from the device.\n`callback` is of the form `callback(err, data)`\n',
+36 silly resolved     readmeFilename: 'README.md',
+36 silly resolved     bugs: { url: 'https://github.com/hanshuebner/node-hid/issues' },
+36 silly resolved     homepage: 'https://github.com/hanshuebner/node-hid',
+36 silly resolved     _id: 'node-hid@0.3.1',
+36 silly resolved     _shasum: 'f564df599f850fb6afb71cec86c5e6dcbdf332b0',
+36 silly resolved     _from: 'node-hid@',
+36 silly resolved     _resolved: 'https://registry.npmjs.org/node-hid/-/node-hid-0.3.1.tgz' } ]
+37 info install node-hid@0.3.1 into /home/andrew/dev/node/traktorF1
+38 info installOne node-hid@0.3.1
+39 info /home/andrew/dev/node/traktorF1/node_modules/node-hid unbuild
+40 verbose tar unpack /home/andrew/.npm/node-hid/0.3.1/package.tgz
+41 silly lockFile 85793f28--traktorF1-node-modules-node-hid tar:///home/andrew/dev/node/traktorF1/node_modules/node-hid
+42 verbose lock tar:///home/andrew/dev/node/traktorF1/node_modules/node-hid /home/andrew/.npm/85793f28--traktorF1-node-modules-node-hid.lock
+43 silly lockFile 6096e591-w-npm-node-hid-0-3-1-package-tgz tar:///home/andrew/.npm/node-hid/0.3.1/package.tgz
+44 verbose lock tar:///home/andrew/.npm/node-hid/0.3.1/package.tgz /home/andrew/.npm/6096e591-w-npm-node-hid-0-3-1-package-tgz.lock
+45 silly gunzTarPerm modes [ '755', '644' ]
+46 silly gunzTarPerm extractEntry package.json
+47 silly gunzTarPerm extractEntry .npmignore
+48 silly gunzTarPerm extractEntry README.md
+49 silly gunzTarPerm extractEntry index.js
+50 silly gunzTarPerm extractEntry binding.gyp
+51 silly gunzTarPerm extractEntry get-hidapi.sh
+52 silly gunzTarPerm extractEntry install.sh
+53 silly gunzTarPerm extractEntry src/.npmignore
+54 silly gunzTarPerm extractEntry src/buzzers.js
+55 silly gunzTarPerm extractEntry src/powermate.js
+56 silly gunzTarPerm extractEntry src/show-devices.js
+57 silly gunzTarPerm extractEntry src/test-buzzers.js
+58 silly gunzTarPerm extractEntry src/test-powermate.js
+59 silly gunzTarPerm extractEntry src/test-ps3.js
+60 silly gunzTarPerm extractEntry src/HID.cc
+61 silly gunzTarPerm extractEntry src/wscript
+62 silly lockFile 85793f28--traktorF1-node-modules-node-hid tar:///home/andrew/dev/node/traktorF1/node_modules/node-hid
+63 silly lockFile 85793f28--traktorF1-node-modules-node-hid tar:///home/andrew/dev/node/traktorF1/node_modules/node-hid
+64 silly lockFile 6096e591-w-npm-node-hid-0-3-1-package-tgz tar:///home/andrew/.npm/node-hid/0.3.1/package.tgz
+65 silly lockFile 6096e591-w-npm-node-hid-0-3-1-package-tgz tar:///home/andrew/.npm/node-hid/0.3.1/package.tgz
+66 info preinstall node-hid@0.3.1
+67 verbose unsafe-perm in lifecycle false
+68 verbose readDependencies using package.json deps
+69 verbose readDependencies using package.json deps
+70 silly resolved []
+71 verbose about to build /home/andrew/dev/node/traktorF1/node_modules/node-hid
+72 info build /home/andrew/dev/node/traktorF1/node_modules/node-hid
+73 verbose linkStuff [ false,
+73 verbose linkStuff   false,
+73 verbose linkStuff   false,
+73 verbose linkStuff   '/home/andrew/dev/node/traktorF1/node_modules' ]
+74 info linkStuff node-hid@0.3.1
+75 verbose linkBins node-hid@0.3.1
+76 verbose linkMans node-hid@0.3.1
+77 verbose rebuildBundles node-hid@0.3.1
+78 info install node-hid@0.3.1
+79 verbose unsafe-perm in lifecycle false
+80 info node-hid@0.3.1 Failed to exec install script
+81 info /home/andrew/dev/node/traktorF1/node_modules/node-hid unbuild
+82 info preuninstall node-hid@0.3.1
+83 info uninstall node-hid@0.3.1
+84 verbose true,/home/andrew/dev/node/traktorF1/node_modules,/home/andrew/dev/node/traktorF1/node_modules unbuild node-hid@0.3.1
+85 info postuninstall node-hid@0.3.1
+86 error node-hid@0.3.1 install: `sh install.sh`
+86 error Exit status 1
+87 error Failed at the node-hid@0.3.1 install script.
+87 error This is most likely a problem with the node-hid package,
+87 error not with npm itself.
+87 error Tell the author that this fails on your system:
+87 error     sh install.sh
+87 error You can get their info via:
+87 error     npm owner ls node-hid
+87 error There is likely additional logging output above.
+88 error System Linux 3.5.0-49-generic
+89 error command "/usr/bin/node" "/usr/bin/npm" "install" "node-hid"
+90 error cwd /home/andrew/dev/node/traktorF1
+91 error node -v v0.10.28
+92 error npm -v 1.4.9
+93 error code ELIFECYCLE
+94 verbose exit [ 1, true ]
