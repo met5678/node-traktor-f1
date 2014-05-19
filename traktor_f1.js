@@ -108,7 +108,7 @@ function LCDDigit(config,controller) {
 		controller.outPacket[config.e] = (segmentBits & 0x10) ? value : 0;
 		controller.outPacket[config.f] = (segmentBits & 0x20) ? value : 0;
 		controller.outPacket[config.g] = (segmentBits & 0x40) ? value : 0;
-		controller.outPacket[config.dp] = dotBrightness;
+		controller.outPacket[config.dp] = Math.floor(dotBrightness*127);
 		controller.invalidateOutput();
 	};
 
@@ -134,6 +134,7 @@ function LCDDigit(config,controller) {
 		},
 		setDot:function(newDotBrightness) {
 			if(newDotBrightness != dotBrightness) {
+				console.log("Setting dot brightness to " + newDotBrightness);
 				dotBrightness = newDotBrightness;
 				updateOutputPacket();
 			}

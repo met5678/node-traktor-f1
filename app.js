@@ -43,6 +43,8 @@ f1.setLCDString("f1");
 f1.setLED("l1_l",.5);
 f1.setLED("l4_r",1);
 
+f1.setLCDDot("l",1);
+
 //f1.setRGB('p1',0,1,0);
 
 var count = 0;
