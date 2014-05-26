@@ -19,12 +19,20 @@ function Button(name,config,controller) {
 };
 
 function Slider(name,config,controller) {
+	var _position = 0;
+
 	var value = 0;
 
 	this.parseInput = function(data) {
-		newValue = data[config.lsb] + (data[config.msb] << 8);
-		if(newValue != value) {
-			value = newValue;
+		newPos = data[config.lsb] + (data[config.msb] << 8);
+		if(newPos != _position) {
+			_position = newPos;
+			if(_position < 10)
+				var value = 0;
+			else if(_position >= 4080)
+				var value = 1;
+			else
+				var value = _position/4096
 			controller.emit(name + ':changed',{value:value});
 		}
 	}
@@ -77,9 +85,9 @@ var LED_RGB = function(config,controller) {
 	var b = 0;
 
 	var updateOutputPacket = function() {
-		controller.outPacket[config.rAddr] = Math.floor(r*127);
-		controller.outPacket[config.gAddr] = Math.floor(g*127);
-		controller.outPacket[config.bAddr] = Math.floor(b*127);
+		controller.outPacket[config.rAddr] = Math.floor(r/2);
+		controller.outPacket[config.gAddr] = Math.floor(g/2);
+		controller.outPacket[config.bAddr] = Math.floor(b/2);
 		controller.invalidateOutput();
 	};
 
@@ -134,7 +142,6 @@ function LCDDigit(config,controller) {
 		},
 		setDot:function(newDotBrightness) {
 			if(newDotBrightness != dotBrightness) {
-				console.log("Setting dot brightness to " + newDotBrightness);
 				dotBrightness = newDotBrightness;
 				updateOutputPacket();
 			}
@@ -246,6 +253,9 @@ TraktorF1.prototype.setLCD = function(which,brightness) {
 };
 
 TraktorF1.prototype.setLCDString = function(message) {
+	if(message.length == 1) {
+		message = " " + message;
+	}
 	this.lcd.l.setChar(message[0]);
 	this.lcd.r.setChar(message[1]);
 }

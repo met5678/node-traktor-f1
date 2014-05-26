@@ -1,6 +1,69 @@
 var traktorF1 = require('./traktor_f1');
+var tinycolor = require('tinycolor2');
+var Canvas = require('canvas');
+
+var canvas = new Canvas(4,4),
+	ctx = canvas.getContext('2d');
+
+ctx.strokeStyle="rgba(255,0,0,1)";
+ctx.fillStyle="rgba(0,0,255,1)";
+ctx.lineWidth = 0.5;
+ctx.lineCap = 'square';
+ctx.beginPath();
+ctx.moveTo(0.5,0.5);
+ctx.arcTo(3.5,0.5,3.5,3.5,3);
+ctx.lineTo(0.5,3.5);
+ctx.closePath();
+ctx.fill();
+ctx.stroke();
+
 
 var f1 = new traktorF1.TraktorF1();
+
+var layers = [];
+
+var Layer = function() {
+	this.active = false;
+	this.editing = false;
+
+};
+
+var BeatManager = function() {
+
+
+};
+
+var userLayer = 0;
+
+
+f1.on('l1:pressed', function(e) {
+	setUserLayer(0);
+});
+f1.on('l2:pressed', function(e) {
+	setUserLayer(1);
+});
+f1.on('l3:pressed', function(e) {
+	setUserLayer(2);
+});
+f1.on('l4:pressed', function(e) {
+	setUserLayer(3);
+});
+
+var setUserLayer = function(layerNum) {
+	f1.setLED('l1_l',0);
+	f1.setLED('l2_l',0);
+	f1.setLED('l3_l',0);
+	f1.setLED('l4_l',0);
+	f1.setLED('l'+(layerNum+1)+'_l',1);
+};
+
+
+var bpm = 128;
+
+f1.setLCDDot("l",1);
+f1.setLCDString("28");
+
+
 
 f1.on('browse:pressed',function(e) {
 	f1.setLED('browse',1);
@@ -24,89 +87,143 @@ f1.on('browse:released',function(e) {
 });
 
 var current = 0;
-/*f1.on('stepper:step',function(e) {
+
+var bpmChanged = false;
+f1.on('stepper:step',function(e) {
 	if(e.direction == 1) {
-		current++;
+		bpm++;
 	}
 	else {
-		current--;
+		bpm--;
 	}
-	if(current < 0)
-		current = 35;
-	if(current > 35)
-		current = 0;
-	f1.setLCDChar('l',current.toString(36));
-	f1.setLCDChar('r',current.toString(36));
-});*/
+	bpmChanged = true;
+	f1.setLCDString(Number(bpm%100).toString());
+	f1.setLCDDot("l",(bpm >= 100));
+	f1.setLCDDot("r",(bpm >= 200));
+});
 
-f1.setLCDString("f1");
-f1.setLED("l1_l",.5);
+f1.setLED("l1_r",1);
+f1.setLED("l2_r",1);
+f1.setLED("l3_r",1);
 f1.setLED("l4_r",1);
 
-f1.setLCDDot("l",1);
 
 //f1.setRGB('p1',0,1,0);
 
 var count = 0;
-
-setInterval(function() {
-	count++;
-	if(count > 16) {
-		count = 0;
-		for(var a=1; a<=16; a++)
-			f1.setRGB('p'+a,0,0,0);
-	}
-	else {
-		f1.setRGB('p'+count,Math.random(),Math.random(),Math.random());
-	}
-},10);
-
-
-/*var HID = require('../node-hid');
-var _ = require('underscore');
-
-var devices = HID.devices();
-
-var f1Stub = _.find(devices, function(device) { return device.vendorId == 6092 && device.productId == 4384 });
-
-if(!f1Stub) {
-	console.log("No F1 found");
-	return;
-}
-
-var f1 = new HID.HID(f1Stub.path);
-console.log("F1 found");
-
-var outPacket = new Buffer(81);
-outPacket[0] = 0x80;
-var index = 0;
-var value = 0x7f;
+var beatFirstHalf = true;
 
 
 
-var onData = function(data) {
-	console.log(data.toJSON());
-	index = (data[5]%80);
-
-	var r = Math.floor((data[14]+data[15]*256)/32);
-	var g = Math.floor((data[16]+data[17]*256)/32);
-	var b = Math.floor((data[18]+data[19]*256)/32);
-	var a = Math.floor((data[20]+data[21]*256)/32);
-	var c = Math.floor((data[6]+data[7]*256)/32);
-	var d = Math.floor((data[8]+data[9]*256)/32);
-	var e = Math.floor((data[10]+data[11]*256)/32);
-	var f = Math.floor((data[12]+data[13]*256)/32);
-
-	outPacket.fill(0,1);
-	outPacket[index+1] = r;
-	outPacket[(index+1)%80+1] = g;
-	outPacket[(index+2)%80+1] = b;
-	outPacket[(index+3)%80+1] = a;
-	outPacket[(index+4)%80+1] = c;
-	outPacket[(index+5)%80+1] = d;
-	outPacket[(index+6)%80+1] = e;
-	outPacket[(index+7)%80+1] = f;
-	f1.write(outPacket);
+var beatPulse = function() {
+	if(beatFirstHalf)
+		f1.setLED('sync',1);
+	else
+		f1.setLED('sync',0);
+	beatFirstHalf = !beatFirstHalf;
+	setTimeout(beatPulse,30000/bpm);
 };
 
-f1.on("data",onData);*/
+
+var beatFirstHalf2 = true;
+
+var beatPulse2 = function() {
+	if(beatFirstHalf2)
+		f1.setLED('quant',1);
+	else
+		f1.setLED('quant',0);
+	beatFirstHalf2 = !beatFirstHalf2;
+	if(bpmChanged) {
+		clearInterval(pulseInterval);
+		pulseInterval = setInterval(beatPulse2,30000/bpm);
+		bpmChanged = false;
+	}
+};
+
+var pulseInterval = setInterval(beatPulse2,30000/bpm);
+
+beatPulse();
+beatPulse2();
+
+
+
+var hue=0, sat=0, val=0, dist = 1;
+
+var setRGBsToCanvas = function() {
+	var pixels = ctx.getImageData(0,0,4,4).data;
+	console.log(pixels);
+	for(var i=0; i<16; i++) {
+		var pixIndex = i*4;
+		var alpha = pixels[pixIndex+3]/255;
+		f1.setRGB('p'+(i+1),alpha*pixels[pixIndex],alpha*pixels[pixIndex+1],alpha*pixels[pixIndex+2]);		
+	}
+};
+
+var setAllRGBs = function() {
+	for(var a=1; a<=16; a++) 
+		f1.setRGB('p'+a,0,0,0);
+	var colors = tinycolor.analogous(tinycolor({h:hue,s:sat,v:val}),16,dist);
+	for(var a=0, b=0; a < 16; a++, b = (b+1)%colors.length) {
+		//var c = (Math.floor(a/4)+b)%4;
+		var c = b;
+		f1.setRGB('p'+(a+1),colors[c]._r,colors[c]._g,colors[c]._b);		
+	}
+};
+
+f1.on('s1:changed',function(e) {
+	hue = e.value*360;
+	setAllRGBs();
+});
+
+f1.on('s2:changed',function(e) {
+	sat = e.value;
+	setAllRGBs();
+});
+
+f1.on('s3:changed',function(e) {
+	val = e.value;
+	setAllRGBs();
+});
+
+f1.on('s4:changed',function(e) {
+	dist = Math.floor(e.value*100)+1;
+	setAllRGBs();
+});
+
+var flashOffCount = 0;
+
+setInterval(function() {
+	if(flashOffCount < 5) {
+		f1.setLED('shift',0);
+		flashOffCount++;
+	}
+	else {
+		f1.setLED('shift',0.5);
+		flashOffCount = 0;
+	}
+},25);
+
+var strobeInteravl = null;
+var strobeOffCount = 0;
+
+f1.on('shift:pressed',function() {
+	strobeInterval = setInterval(function() {
+		if(strobeOffCount < 3) {
+			for(var a=1; a<=16; a++) 
+				f1.setRGB('p'+a,0,0,0);
+			strobeOffCount++;			
+		}
+		else {
+			for(var a=1; a<=16; a++) 
+				f1.setRGB('p'+a,255,255,255);
+			strobeOffCount = 0;
+		}
+	},25);
+});
+
+f1.on('shift:released',function(e) {
+	if(!!strobeInterval)
+		clearInterval(strobeInterval);
+});
+
+f1.on('reverse:pressed',setRGBsToCanvas);
