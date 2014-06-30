@@ -17,7 +17,6 @@ ctx.closePath();
 ctx.fill();
 ctx.stroke();
 
-
 var f1 = new traktorF1.TraktorF1();
 
 var layers = [];
@@ -111,25 +110,15 @@ f1.setLED("l4_r",1);
 //f1.setRGB('p1',0,1,0);
 
 var count = 0;
-var beatFirstHalf = true;
-
-
-
-var beatPulse = function() {
-	if(beatFirstHalf)
-		f1.setLED('sync',1);
-	else
-		f1.setLED('sync',0);
-	beatFirstHalf = !beatFirstHalf;
-	setTimeout(beatPulse,30000/bpm);
-};
-
 
 var beatFirstHalf2 = true;
+var lastBeatMillis = new Date().getTime();
 
 var beatPulse2 = function() {
-	if(beatFirstHalf2)
+	if(beatFirstHalf2) {
 		f1.setLED('quant',1);
+		lastBeatMillis = (new Date().getTime());
+	}
 	else
 		f1.setLED('quant',0);
 	beatFirstHalf2 = !beatFirstHalf2;
@@ -142,9 +131,21 @@ var beatPulse2 = function() {
 
 var pulseInterval = setInterval(beatPulse2,30000/bpm);
 
-beatPulse();
-beatPulse2();
 
+var frameProgress = 0;
+
+var doFrame = function() {
+	var newFrameProgress = ((new Date().getTime()) - lastBeatMillis) / (60000/bpm);
+	if(newFrameProgress < frameProgress)
+		f1.setLED('capture',1);
+	else
+		f1.setLED('capture',0);
+	frameProgress = newFrameProgress;
+};
+
+setInterval(doFrame,25);
+
+doFrame();
 
 
 var hue=0, sat=0, val=0, dist = 1;
@@ -162,8 +163,8 @@ var setRGBsToCanvas = function() {
 var setAllRGBs = function() {
 	for(var a=1; a<=16; a++) 
 		f1.setRGB('p'+a,0,0,0);
-	var colors = tinycolor.analogous(tinycolor({h:hue,s:sat,v:val}),16,dist);
-	for(var a=0, b=0; a < 16; a++, b = (b+1)%colors.length) {
+	var colors = tinycolor.analogous(tinycolor({h:hue,s:sat,v:val}),17,dist);
+	for(var a=0, b=1; a < 16; a++, b = (b+1)%colors.length) {
 		//var c = (Math.floor(a/4)+b)%4;
 		var c = b;
 		f1.setRGB('p'+(a+1),colors[c]._r,colors[c]._g,colors[c]._b);		
@@ -198,7 +199,7 @@ setInterval(function() {
 		flashOffCount++;
 	}
 	else {
-		f1.setLED('shift',0.5);
+		f1.setLED('shift',1);
 		flashOffCount = 0;
 	}
 },25);
@@ -218,7 +219,7 @@ f1.on('shift:pressed',function() {
 				f1.setRGB('p'+a,255,255,255);
 			strobeOffCount = 0;
 		}
-	},25);
+	},20);
 });
 
 f1.on('shift:released',function(e) {
