@@ -1,6 +1,9 @@
 var traktorF1 = require('./traktor_f1');
 var tinycolor = require('tinycolor2');
-var Canvas = require('canvas');
+var leap = require('leapjs');
+var _ = require('underscore');
+
+/*var Canvas = require('canvas');
 
 var canvas = new Canvas(4,4),
 	ctx = canvas.getContext('2d');
@@ -15,7 +18,7 @@ ctx.arcTo(3.5,0.5,3.5,3.5,3);
 ctx.lineTo(0.5,3.5);
 ctx.closePath();
 ctx.fill();
-ctx.stroke();
+ctx.stroke();*/
 
 
 var f1 = new traktorF1.TraktorF1();
@@ -25,8 +28,18 @@ var layers = [];
 var Layer = function() {
 	this.active = false;
 	this.editing = false;
+	this.brightness = 0;
 
+	this.colors = [];
+	this.timing = {};
+	this.effect = function() {};
+	this.group = {};
 };
+
+Layer.prototype.isActive = function() {
+	return this.active && !!this.brightness;
+}
+
 
 var BeatManager = function() {
 
@@ -61,8 +74,7 @@ var setUserLayer = function(layerNum) {
 var bpm = 128;
 
 f1.setLCDDot("l",1);
-f1.setLCDString("28");
-
+var string = "Anna KILL EM ALL";
 
 
 f1.on('browse:pressed',function(e) {
@@ -96,10 +108,13 @@ f1.on('stepper:step',function(e) {
 	else {
 		bpm--;
 	}
-	bpmChanged = true;
+	/*bpmChanged = true;
 	f1.setLCDString(Number(bpm%100).toString());
 	f1.setLCDDot("l",(bpm >= 100));
 	f1.setLCDDot("r",(bpm >= 200));
+	*/
+	f1.setLCDString(string.substr(bpm%(string.length-1),2));
+
 });
 
 f1.setLED("l1_r",1);
@@ -150,14 +165,15 @@ beatPulse2();
 var hue=0, sat=0, val=0, dist = 1;
 
 var setRGBsToCanvas = function() {
-	var pixels = ctx.getImageData(0,0,4,4).data;
+	/*var pixels = ctx.getImageData(0,0,4,4).data;
 	console.log(pixels);
 	for(var i=0; i<16; i++) {
 		var pixIndex = i*4;
 		var alpha = pixels[pixIndex+3]/255;
 		f1.setRGB('p'+(i+1),alpha*pixels[pixIndex],alpha*pixels[pixIndex+1],alpha*pixels[pixIndex+2]);		
-	}
+	}*/
 };
+
 
 var setAllRGBs = function() {
 	for(var a=1; a<=16; a++) 
@@ -227,3 +243,52 @@ f1.on('shift:released',function(e) {
 });
 
 f1.on('reverse:pressed',setRGBsToCanvas);
+
+Number.prototype.map = function ( in_min , in_max , out_min , out_max ) {
+  return ( this - in_min ) * ( out_max - out_min ) / ( in_max - in_min ) + out_min;
+}
+/*
+var controller = new leap.Controller()
+controller.on("frame", function(frame) {
+	//console.log(frame.data.r[0]);
+	var rData = frame.data.r[0];
+	var tData = frame.data.r[0];
+	hue = ((rData[1]+1)/2)*360;
+	sat = Math.abs((tData[1]+1)/2)/400;
+	val = Math.abs((tData[2]+1)/2)/400;
+	setAllRGBs();
+});
+
+var frameCount = 0;
+controller.on("frame", function(frame) {
+  frameCount++;
+});
+
+controller.on('ready', function() {
+    console.log("ready");
+});
+controller.on('connect', function() {
+    console.log("connect");
+});
+controller.on('disconnect', function() {
+    console.log("disconnect");
+});
+controller.on('focus', function() {
+    console.log("focus");
+});
+controller.on('blur', function() {
+    console.log("blur");
+});
+controller.on('deviceConnected', function() {
+    console.log("deviceConnected");
+});
+controller.on('deviceDisconnected', function() {
+    console.log("deviceDisconnected");
+});
+
+controller.connect();
+console.log("\nWaiting for device to connect...");
+
+
+
+*/

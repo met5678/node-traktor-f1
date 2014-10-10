@@ -1,0 +1,19 @@
+{
+  "name": "node-traktor-f1",
+  "version": "0.0.0",
+  "authors": [
+    "Andrew Metcalf <andrew@luminal.io>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "leapjs": "~0.6.2",
+    "jquery": "~2.1.1"
+  }
+}

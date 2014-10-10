@@ -1,0 +1,26 @@
+{
+  "name": "node-traktor-f1",
+  "version": "0.0.0",
+  "description": "",
+  "main": "main.html",
+  "dependencies": {
+    "leapjs": "^0.6.2",
+    "node-hid": "^0.3.1",
+    "timeline": "^0.0.1",
+    "tinycolor2": "^0.10.0",
+    "underscore": "^1.7.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-wiredep": "^1.9.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://met5678@bitbucket.org/met5678/node-traktor-f1.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
