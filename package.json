@@ -2,9 +2,8 @@
   "name": "node-traktor-f1",
   "version": "0.0.0",
   "description": "",
-  "main": "main.html",
+  "main": "./lib/traktor_f1",
   "dependencies": {
-    "leapjs": "^0.6.2",
     "node-hid": "^0.3.1",
     "timeline": "^0.0.1",
     "tinycolor2": "^0.10.0",
@@ -21,6 +20,6 @@
     "type": "git",
     "url": "https://met5678@bitbucket.org/met5678/node-traktor-f1.git"
   },
-  "author": "",
+  "author": "Andrew Metcalf <met5678@gmail.com>",
   "license": "ISC"
 }
