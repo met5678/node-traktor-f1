@@ -2,7 +2,7 @@
   "name": "node-traktor-f1",
   "version": "0.0.0",
   "description": "",
-  "main": "main.html",
+  "main": "./lib/traktor_f1",
   "dependencies": {
     "node-hid": "^0.3.1",
     "timeline": "^0.0.1",
