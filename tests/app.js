@@ -7,11 +7,6 @@ var cols = 4;
 
 var f1 = new traktorF1.TraktorF1();
 
-
-
-
-
-
 var layers = [];
 
 var Layer = function() {
