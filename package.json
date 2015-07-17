@@ -4,10 +4,8 @@
   "description": "",
   "main": "./lib/traktor_f1",
   "dependencies": {
-    "node-hid": "^0.3.1",
-    "timeline": "^0.0.1",
-    "tinycolor2": "^0.10.0",
-    "underscore": "^1.7.0"
+    "lodash": "^3.10.0",
+    "node-hid": "^0.4.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

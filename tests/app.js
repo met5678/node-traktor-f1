@@ -1,6 +1,6 @@
 var traktorF1 = require('../lib/traktor_f1');
 var tinycolor = require('tinycolor2');
-var _ = require('underscore');
+var _ = require('lodash');
 
 var rows = 4;
 var cols = 4;
@@ -23,12 +23,6 @@ var Layer = function() {
 Layer.prototype.isActive = function() {
 	return this.active && !!this.brightness;
 }
-
-
-var BeatManager = function() {
-
-
-};
 
 var userLayer = 0;
 
