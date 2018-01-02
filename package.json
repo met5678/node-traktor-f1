@@ -6,7 +6,7 @@
   "main": "./lib/traktor_f1",
   "dependencies": {
     "lodash": "^4.5.1",
-    "node-hid": "^0.5.7",
+    "node-hid": "^0.7.0",
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {},
