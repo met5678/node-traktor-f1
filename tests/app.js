@@ -89,7 +89,7 @@ f1.on('stepper:step',function(e) {
 	f1.setLCDString(Number(bpm%100).toString());
 	f1.setLCDDot("l",(bpm >= 100));
 	f1.setLCDDot("r",(bpm >= 200));
-	
+
 });
 
 f1.setLED("l1_r",1);
@@ -147,19 +147,19 @@ var setRGBsToCanvas = function() {
 	for(var i=0; i<16; i++) {
 		var pixIndex = i*4;
 		var alpha = pixels[pixIndex+3]/255;
-		f1.setRGB('p'+(i+1),alpha*pixels[pixIndex],alpha*pixels[pixIndex+1],alpha*pixels[pixIndex+2]);		
+		f1.setRGB('p'+(i+1),alpha*pixels[pixIndex],alpha*pixels[pixIndex+1],alpha*pixels[pixIndex+2]);
 	}*/
 };
 
 
 var setAllRGBs = function() {
-	for(var a=1; a<=16; a++) 
+	for(var a=1; a<=16; a++)
 		f1.setRGB('p'+a,0,0,0);
-	var colors = tinycolor.analogous(tinycolor({h:hue,s:sat,v:val}),17,dist);
+	var colors = tinycolor({h:hue,s:sat,v:val}).analogous(17,dist);
 	for(var a=0, b=1; a < 16; a++, b = (b+1)%colors.length) {
 		//var c = (Math.floor(a/4)+b)%4;
 		var c = b;
-		f1.setRGB('p'+(a+1),colors[c]._r,colors[c]._g,colors[c]._b);		
+		f1.setRGB('p'+(a+1),colors[c]._r,colors[c]._g,colors[c]._b);
 	}
 };
 
@@ -202,12 +202,12 @@ var strobeOffCount = 0;
 f1.on('shift:pressed',function() {
 	strobeInterval = setInterval(function() {
 		if(strobeOffCount < 3) {
-			for(var a=1; a<=16; a++) 
+			for(var a=1; a<=16; a++)
 				f1.setRGB('p'+a,0,0,0);
-			strobeOffCount++;			
+			strobeOffCount++;
 		}
 		else {
-			for(var a=1; a<=16; a++) 
+			for(var a=1; a<=16; a++)
 				f1.setRGB('p'+a,255,255,255);
 			strobeOffCount = 0;
 		}
